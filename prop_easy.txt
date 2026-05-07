@@ -1,0 +1,45 @@
+# Dataset 1: Propositional tautologies (easy)
+# Source: classical propositional logic — see Hou (2021) Ch. 2-3
+# All formulas are tautologies. Expected result: True.
+
+# Identity / weakening
+P -> P
+P -> (Q -> P)
+P /\ Q -> P
+P /\ Q -> Q
+P -> P \/ Q
+Q -> P \/ Q
+
+# Excluded middle and non-contradiction
+P \/ ~P
+~(P /\ ~P)
+
+# Modus ponens and tollens
+(P -> Q) /\ P -> Q
+(P -> Q) /\ ~Q -> ~P
+(P -> Q) -> (~Q -> ~P)
+
+# Transitivity of implication
+(P -> Q) /\ (Q -> R) -> P -> R
+
+# Currying / uncurrying
+(P -> Q -> R) -> (P /\ Q -> R)
+(P /\ Q -> R) -> (P -> Q -> R)
+
+# De Morgan's laws
+~(P \/ Q) -> ~P /\ ~Q
+~P /\ ~Q -> ~(P \/ Q)
+~(P /\ Q) -> ~P \/ ~Q
+~P \/ ~Q -> ~(P /\ Q)
+
+# Distributivity
+P /\ (Q \/ R) -> (P /\ Q) \/ (P /\ R)
+(P /\ Q) \/ (P /\ R) -> P /\ (Q \/ R)
+P \/ (Q /\ R) -> (P \/ Q) /\ (P \/ R)
+
+# Double negation
+~~P -> P
+P -> ~~P
+
+# Peirce's law (requires classical logic)
+((P -> Q) -> P) -> P

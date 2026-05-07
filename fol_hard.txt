@@ -1,0 +1,40 @@
+# Dataset 3: FOL tautologies (hard)
+# Source: constructed to stress quantifier instantiation — inspired by
+#         TPTP problem library (Sutcliffe, 2017) categories SYN and FOF.
+# All formulas are tautologies. Expected result: True.
+# These require interleaving ∀L and ∃R, which the baseline cannot handle.
+
+# Quantifier swap — valid direction (classic result)
+exists x. forall y. R(x,y) -> forall y. exists x. R(x,y)
+
+# Combining ∀ and ∃ across implications
+forall x. (P(x) -> Q(x)) -> (exists x. P(x) -> exists x. Q(x))
+forall x. (P(x) /\ Q(x)) -> (forall x. P(x) /\ forall x. Q(x))
+
+# Barcan-style / monotone quantifier formulas
+forall x. (P(x) -> B) -> (exists x. P(x) -> B)
+forall x. (P(x) -> Q(x)) -> (~(forall x. Q(x)) -> ~(forall x. P(x)))
+
+# Transitivity instantiation
+forall x. forall y. forall z. (R(x,y) /\ R(y,z) -> R(x,z)) -> (R(a,b) /\ R(b,c) -> R(a,c))
+
+# Reflexivity witness
+forall x. exists y. (P(x) -> P(y))
+
+# Projectivity of conjunction with exists
+(exists x. P(x)) /\ (forall x. (P(x) -> Q(x))) -> exists x. Q(x)
+
+# Skolem-style: function term witnesses
+forall x. P(f(x)) -> exists y. P(y)
+
+# Classical combination requiring several steps
+(forall x. (P(x) \/ Q(x))) /\ ~(exists x. Q(x)) -> forall x. P(x)
+exists x. (P(x) \/ Q(x)) /\ ~(exists x. P(x)) -> exists x. Q(x)
+
+# Deeper nesting
+exists x. (P(x) /\ forall y. (Q(y) -> R(x,y))) -> exists x. P(x)
+forall x. (P(x) -> (Q(x) -> R(x))) -> (forall x. P(x) -> (forall x. Q(x) -> forall x. R(x)))
+
+# Chains requiring ∀L + ∃R interleaving
+forall x. P(x) -> exists y. P(y)
+exists x. forall y. (P(x) -> P(y))

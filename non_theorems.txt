@@ -1,0 +1,28 @@
+# Dataset 4: Non-theorems
+# These formulas are NOT tautologies — no proof exists.
+# Expected result: False (prover should stop / hit depth limit).
+# Included to verify the prover correctly rejects unprovable formulas.
+
+# Bare atoms and unsupported claims
+P
+P /\ Q
+P \/ Q
+P -> Q
+~P -> P
+
+# Requires premises not given
+(P -> Q) -> P
+P -> P /\ Q
+P /\ (P -> Q)
+~(P -> Q)
+
+# FOL non-theorems — require specific domain structure
+exists x. P(x)
+forall x. P(x)
+exists x. forall y. R(x,y)
+
+# Invalid quantifier swap (the converse of a theorem)
+forall x. exists y. R(x,y) -> exists x. forall y. R(x,y)
+
+# Unsound converse
+forall x. (P(x) -> Q(x)) -> forall x. (Q(x) -> P(x))

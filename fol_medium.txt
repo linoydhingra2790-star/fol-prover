@@ -1,0 +1,36 @@
+# Dataset 2: First-order tautologies (medium difficulty)
+# Source: standard FOL — see Hou (2021) Ch. 4-5
+# All formulas are tautologies. Expected result: True.
+
+# Basic quantifier rules
+forall x. P(x) -> P(a)
+P(a) -> exists x. P(x)
+forall x. P(x) -> exists x. P(x)
+
+# Quantifier distribution over connectives
+forall x. (P(x) /\ Q(x)) -> forall x. P(x)
+forall x. (P(x) /\ Q(x)) -> (forall x. P(x) /\ forall x. Q(x))
+forall x. P(x) /\ forall x. Q(x) -> forall x. (P(x) /\ Q(x))
+exists x. (P(x) /\ Q(x)) -> exists x. P(x)
+exists x. P(x) \/ exists x. Q(x) -> exists x. (P(x) \/ Q(x))
+
+# Moving quantifiers through implication
+forall x. (P(x) -> Q(x)) -> (forall x. P(x) -> forall x. Q(x))
+forall x. (P(x) -> Q(x)) -> (exists x. P(x) -> exists x. Q(x))
+(exists x. P(x) -> forall x. Q(x)) -> forall x. (P(x) -> Q(x))
+
+# De Morgan for quantifiers
+~(exists x. P(x)) -> forall x. ~P(x)
+forall x. ~P(x) -> ~(exists x. P(x))
+~(forall x. P(x)) -> exists x. ~P(x)
+exists x. ~P(x) -> ~(forall x. P(x))
+
+# Swapping independent quantifiers
+forall x. forall y. R(x,y) -> forall y. forall x. R(x,y)
+exists x. exists y. R(x,y) -> exists y. exists x. R(x,y)
+
+# Excluded middle per predicate
+forall x. (P(x) \/ ~P(x))
+
+# Mixing quantifiers and propositional constants
+(exists x. P(x)) /\ Q(a) -> exists x. (P(x) /\ Q(a))
